@@ -1,1 +1,73 @@
-<p>login works!</p>
+<div class="login-container">
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+    <div class="toast align-items-center text-white border-0" 
+         [class.bg-danger]="toastMessage.includes('Wrong')"
+         [class.show]="showToast" 
+         role="alert" 
+         aria-live="assertive" 
+         aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ toastMessage }}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showToast = false" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
+        <div class="card shadow-lg border-0 rounded-0 overflow-hidden">
+          <!-- Blue Header -->
+          <div class="card-header bg-primary text-white text-center py-4">
+            <h1 class="mb-1 fw-bold fs-2">ParkSmart</h1>
+            <p class="mb-0">Parking Management System</p>
+          </div>
+          
+          <!-- White Card Body -->
+          <div class="card-body p-4 p-sm-5 bg-white">
+            <h2 class="text-center mb-4 fw-semibold fs-4">Operator Login</h2>
+            <form>
+              <div class="mb-3">
+                <label for="username" class="form-label fw-normal">Username</label>
+                <input 
+                  type="text" 
+                  class="form-control"
+                  id="username" 
+                  name="username"
+                  [(ngModel)]="loginObj.emailId"
+                  placeholder="Enter username"
+                  required
+                />
+              </div>
+              
+              <div class="mb-4">
+                <label for="password" class="form-label fw-normal">Password</label>
+                <input 
+                  type="password" 
+                  class="form-control"
+                  id="password" 
+                  name="password"
+                  [(ngModel)]="loginObj.password"
+                  placeholder="Enter password"
+                  required
+                />
+              </div>
+              
+              <div class="d-grid">
+                <button type="submit" (click)="onLogin()" class="btn btn-primary btn-lg">Login</button>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Footer -->
+          <div class="card-footer text-center text-muted py-3 bg-light">
+            <small>© 2025 ParkSmart. All rights reserved.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
