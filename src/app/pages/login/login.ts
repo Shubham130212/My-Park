@@ -9,21 +9,25 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   imports: [FormsModule, CommonModule],
-  templateUrl: './login.html', 
+  templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
   loginObj: User = new User();
-  userServ=inject(UserService);
-  router=inject(Router);
+  userServ = inject(UserService);
+  router = inject(Router);
 
   showToast = false;
   toastMessage = '';
 
-  onLogin(){
+  onLogin() {
     this.userServ.loginUser(this.loginObj).subscribe({
       next: (res: IUserModel) => {
-        localStorage.setItem('parkUser',JSON.stringify(res));
+        localStorage.setItem('parkUser', JSON.stringify(res));
+
+        this.userServ.loggedUserData = res;
+        console.log('userData',this.userServ.loggedUserData);
+        
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
@@ -35,7 +39,7 @@ export class Login {
   displayToast(message: string) {
     this.toastMessage = message;
     this.showToast = true;
-    
+
     // Auto-hide toast after 3 seconds
     setTimeout(() => {
       this.showToast = false;
